@@ -15,19 +15,12 @@ export default function App() {
 
   const handleNoHover = () => {
     if (isAccepted) return;
-    
-    // 버튼의 대략적인 크기 (패딩 포함 약 120x60)
-    const btnWidth = 120;
-    const btnHeight = 60;
-    
-    // 화면 중앙으로부터의 최대 이동 거리 계산 (화면 밖으로 나가지 않게)
-    // window.innerWidth / 2 가 중앙이므로, 여기서 btnWidth/2 만큼 뺀 값이 최대 범위
-    const maxX = (window.innerWidth / 2) - (btnWidth / 2) - 20;
-    const maxY = (window.innerHeight / 2) - (btnHeight / 2) - 20;
-    
-    // 새로운 좌표 생성 (-maxX ~ maxX)
-    const newX = (Math.random() * 2 - 1) * maxX;
-    const newY = (Math.random() * 2 - 1) * maxY;
+
+    // 너무 멀리 도망가서 화면에서 안 보이지 않도록
+    // 적당한 범위 안에서만 이동 (예: -150px ~ 150px)
+    const maxDistance = 150;
+    const newX = (Math.random() * 2 - 1) * maxDistance;
+    const newY = (Math.random() * 2 - 1) * maxDistance;
     
     setNoButtonPos({ x: newX, y: newY });
     setYesButtonSize(prev => Math.min(prev + 0.1, 2.5)); // 적절한 크기까지만 커지게 함
@@ -135,7 +128,7 @@ export default function App() {
                 initial={{ y: 20 }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
-                className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-8 border-white shadow-2xl relative z-10"
+                className="w-64 h-64 md:w-80 md:h-90 rounded-3xl overflow-hidden border-8 border-white shadow-2xl relative z-10"
               >
                 <img
                   src="https://postfiles.pstatic.net/MjAyNjAyMjdfMjQ2/MDAxNzcyMTcyODc0NTk2.U654wGVGO6UiMh6-w-j7VlGdjHIrf9iyu_3mwFpBfuMg.Hqweugcj32eUmZgTvgicGIZSlwASh3ajNIvG8is5fckg.JPEG/IMG%EF%BC%BF1741.JPG?type=w966"
